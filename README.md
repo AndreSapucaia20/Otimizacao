@@ -1,11 +1,13 @@
 # otimizador
 
-MVP em Python para comparar três algoritmos de otimização em séries temporais financeiras usando `PETR4.SA` (Yahoo Finance via `yfinance`), com execução local e caminho claro para AWS Lambda + API Gateway + S3 + DynamoDB + EventBridge + Step Functions.
+Projeto de TCC (Mackenzie, FCI): comparação de técnicas de otimização aplicadas à alocação de carteiras de ações da B3.
+
+Os algoritmos usam o mesmo conjunto de dados (preços do Yahoo Finance via yfinance), a mesma função objetivo e retornam o mesmo formato de resultado (JSON), o que permite compará-los de forma justa.
 
 ## Visão geral
 
 O projeto compara:
-1. Programação linear
+1. Programação Quadrática
 2. Algoritmo genético
 3. Simulated annealing
 
@@ -18,15 +20,19 @@ Todos os algoritmos:
 
 ```text
 src/otimizador/
-  domain/          # contratos, modelos e configuração
-  data/            # ingestão e feature engineering
-  algorithms/      # LP, GA, SA
-  evaluation/      # ranking/comparação
-  infrastructure/  # HTTP helpers e handlers Lambda
-tests/             # testes unitários rápidos
-docs/              # documentação do experimento
-scripts/           # execução local e empacotamento
-examples/          # exemplos de saída JSON
+  domain/          configuração, modelos e função objetivo
+  data/            download dos dados (yfinance + cache) e cálculo de retornos
+  algorithms/      os três algoritmos de otimização
+  evaluation/      ranking/comparação, exportação CSV/JSON e relatório em PDF
+  infrastructure/  API local (FastAPI)
+  application.py   executa o experimento completo
+  cli.py           execução por linha de comando
+frontend/          interface web estática (HTML, CSS e JS)
+scripts/           geração de gráficos e PDF, execução do experimento
+tests/             testes automatizados (pytest)
+cache/             séries históricas baixadas (CSV)
+examples/          exemplos de saída JSON e exportações
+docs/              figuras, relatórios gerados e documentos do TCC
 ```
 
 Escolha de MVP: com apenas um ativo (`PETR4.SA`), os pesos são distribuídos entre horizontes de retorno (`ret_1d`, `ret_5d`, `ret_21d`) para permitir comparação real dos algoritmos sem overengineering.
@@ -93,22 +99,6 @@ Use `run_full_experiment()` em `src/otimizador/application.py`, ou chame:
 
 Todos recebem `OptimizationRequest` + `ObjectiveFunction`.
 
-## AWS / Lambda
-
-Handlers criados:
-- `quantvision-data-handler`
-- `quantvision-optimize-handler`
-- `quantvision-report-handler`
-- `quantvision-status-handler`
-
-Módulos:
-- `src/otimizador/infrastructure/handlers/quantvision_data_handler.py`
-- `src/otimizador/infrastructure/handlers/quantvision_optimize_handler.py`
-- `src/otimizador/infrastructure/handlers/quantvision_report_handler.py`
-- `src/otimizador/infrastructure/handlers/quantvision_status_handler.py`
-
-Template SAM base: `infrastructure.template.yaml`
-
 ## Empacotamento para deploy
 
 Linux/macOS:
@@ -125,20 +115,9 @@ Windows PowerShell:
 
 Artefato gerado: `dist/otimizador-lambda.zip`
 
-## CI/CD (Jenkins)
+## Dados e cache
 
-Pipeline mínimo em `Jenkinsfile`:
-1. Instala dependências
-2. Roda lint (`ruff`)
-3. Roda testes (`pytest`)
-4. Gera artefato zip
-
-## Exemplos JSON
-
-- `examples/linear_programming.json`
-- `examples/genetic_algorithm.json`
-- `examples/simulated_annealing.json`
-- `examples/petr4_full_report.json`
+Na primeira execução o `yfinance` baixa os preços do Yahoo Finance (é preciso internet) e salva um CSV em `cache/`. Nas execuções seguintes, se o CSV do mesmo período e dos mesmos ativos existir, ele é reutilizado.
 
 ## Front-end com Docker
 
@@ -211,31 +190,6 @@ Ou via API/Frontend:
 - Endpoint `POST /report/pdf` gera o PDF e retorna o arquivo para download.
 - No frontend, use o botao `Gerar PDF`.
 
-## GitHub Actions (CI/CD)
-
-Workflow criado em `.github/workflows/ci-cd-lambda.yml` com:
-- CI em `pull_request`/`push` na `main` (ruff + pytest)
-- Deploy automatico da Lambda `dev` em `push` na `main`
-
-### Configuracoes no GitHub
-
-1. `Settings -> Environments -> dev` (opcional: approval manual)
-2. `Settings -> Secrets and variables -> Actions`
-
-Secrets:
-- `AWS_ROLE_ARN`: ARN da role assumida via OIDC
-
-Variables:
-- `AWS_REGION`: ex. `sa-east-1`
-- `LAMBDA_FUNCTION_NAME`: ex. `quantvision-optimize-handler-dev`
-- `LAMBDA_DEPLOY_BUCKET`: bucket S3 para upload do zip de deploy
-
-### Observacao OIDC
-
-A role da AWS precisa confiar no provedor OIDC do GitHub e permitir:
-- `s3:PutObject` no bucket de deploy
-- `lambda:update-function-code`
-- `lambda:invokeFunction`
 
 ## Graficos para TCC
 
