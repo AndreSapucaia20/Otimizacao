@@ -49,6 +49,7 @@ Requer Python 3.10 ou superior.
 ```text
 bash
 python -m venv .venv
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass  # se necessário
 .venv\Scripts\activate         # Windows
 
 pip install -r requirements.txt -r requirements-dev.txt
