@@ -14,7 +14,7 @@ from otimizador.evaluation.exporter import export_experiment_results
 from otimizador.evaluation.report_pdf import generate_pdf_report
 
 ALGORITHM_OPTIONS = {
-    "linear_programming",
+    "quadratic_programming",
     "genetic_algorithm",
     "simulated_annealing",
     "all",
@@ -41,8 +41,8 @@ app.add_middleware(
 
 class OptimizeRequest(BaseModel):
     algorithm: Literal[
-        "linear_programming", "genetic_algorithm", "simulated_annealing", "all"
-    ] = "linear_programming"
+        "quadratic_programming", "genetic_algorithm", "simulated_annealing", "all"
+    ] = "quadratic_programming"
     symbols: list[str] | None = None
     period: str | None = None
     start_date: str | None = None
