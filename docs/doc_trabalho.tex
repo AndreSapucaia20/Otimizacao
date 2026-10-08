@@ -46,10 +46,10 @@
 % Informações de dados para CAPA e FOLHA DE ROSTO
 % ---
 \titulo{Software de otimização de carteiras de investimentos da B3}
-\autor{André Sapucaia de Araújo}
+\autor{Henrique Yuji Isogai Yoneoka \\ André Sapucaia de Araújo}
 \local{São Paulo}
 \data{2026}
-\orientador{Rogério de Oliveira}
+\orientador{Arnaldo Rabello de Aguiar Vallim Filho}
 \instituicao{%
   Universidade Presbiteriana Mackenzie
   \par
@@ -172,7 +172,7 @@
 
 A otimização de carteiras de investimentos é um problema clássico das finanças quantitativas, pois envolve a definição da melhor distribuição de capital entre diferentes ativos, considerando objetivos como maximização de retorno, minimização de risco e melhoria da relação risco-retorno. Com o aumento da disponibilidade de dados e da capacidade computacional, tornou-se viável empregar sistemas capazes de automatizar esse processo e comparar diferentes abordagens matemáticas e heurísticas de forma estruturada.
 
-Neste contexto, o projeto tem como objetivo desenvolver um software para análise e comparação de técnicas de otimização aplicadas a ativos da B3. A proposta do sistema é permitir a seleção de ativos, a importação de seus dados históricos e o cálculo de métricas estatísticas fundamentais, como retorno médio, variância, covariância e volatilidade. A partir dessas informações, o software executa métodos de otimização como Programação Linear, Algoritmo Genético e Simulated Annealing, possibilitando a geração e avaliação de carteiras de investimento sob diferentes parâmetros e restrições, como capital disponível, limites de alocação por ativo e possibilidade de venda a descoberto.
+Neste contexto, o projeto tem como objetivo desenvolver um software para análise e comparação de técnicas de otimização aplicadas a ativos da B3. A proposta do sistema é permitir a seleção de ativos, a importação de seus dados históricos e o cálculo de métricas estatísticas fundamentais, como retorno médio, variância, covariância e volatilidade. A partir dessas informações, o software executa métodos de otimização como Programação Quadrática, Algoritmo Genético e Simulated Annealing, possibilitando a geração e avaliação de carteiras de investimento sob diferentes parâmetros e restrições, como capital disponível, limites de alocação por ativo e possibilidade de venda a descoberto.
 
 Como resultado, espera-se que o sistema permita comparar, de forma padronizada, o desempenho de cada técnica por meio de indicadores como pesos dos ativos, retorno esperado, risco, índice de Sharpe e tempo de execução. Com isso, o trabalho se posiciona como uma contribuição para o estudo de métodos computacionais aplicados ao mercado financeiro, especialmente no contexto da tomada de decisão baseada em dados.
 
@@ -187,7 +187,7 @@ A construção de uma carteira de investimentos envolve a análise simultânea d
 % ---
 \section{Justificativa}
 % ---
-A demanda por esse produto surge da necessidade de comparar, de maneira estruturada e objetiva, diferentes técnicas de otimização aplicadas ao mercado financeiro. O projeto busca verificar as abordagens de Programação Linear, Algoritmo Genético e Simulated Annealing e como se comportam diante de um mesmo conjunto de ativos e restrições, permitindo avaliar qual método apresenta melhor desempenho em termos de retorno, risco, índice de Sharpe e tempo de execução. Dessa forma, a justificativa do projeto está tanto na sua relevância acadêmica, ao promover a comparação entre métodos quantitativos, quanto na sua utilidade prática, ao oferecer suporte à análise de carteiras de investimentos da B3.
+A demanda por esse produto surge da necessidade de comparar, de maneira estruturada e objetiva, diferentes técnicas de otimização aplicadas ao mercado financeiro. O projeto busca verificar as abordagens de Programação Quadrática, Algoritmo Genético e Simulated Annealing e como se comportam diante de um mesmo conjunto de ativos e restrições, permitindo avaliar qual método apresenta melhor desempenho em termos de retorno, risco, índice de Sharpe e tempo de execução. Dessa forma, a justificativa do projeto está tanto na sua relevância acadêmica, ao promover a comparação entre métodos quantitativos, quanto na sua utilidade prática, ao oferecer suporte à análise de carteiras de investimentos da B3.
 
 % ---
 \section{Descrição do Produto}
@@ -226,7 +226,7 @@ RF01 & O sistema deve permitir a seleção de ativos negociados na B3. \\ \hline
 RF02 & O sistema deve permitir a importação de dados históricos dos ativos selecionados. \\ \hline
 RF03 & O sistema deve calcular métricas estatísticas dos ativos, incluindo retorno médio, variância, covariância e volatilidade. \\ \hline
 RF04 & O sistema deve permitir a definição dos parâmetros do problema, tais como capital disponível, limites mínimo e máximo de alocação por ativo, possibilidade de venda a descoberto e função objetivo. \\ \hline
-RF05 & O sistema deve implementar o método de Programação Linear para a otimização da carteira de investimentos. \\ \hline
+RF05 & O sistema deve implementar o método de Programação Quadrática para a otimização da carteira de investimentos. \\ \hline
 RF06 & O sistema deve implementar pelo menos uma técnica meta-heurística, como Algoritmo Genético ou Simulated Annealing. \\ \hline
 RF07 & O sistema deve permitir a execução dos métodos de otimização de forma individual ou comparativa. \\ \hline
 RF08 & O sistema deve apresentar, para cada método executado, os pesos dos ativos, o retorno esperado, o risco, o índice de Sharpe e o tempo de execução. \\ \hline
@@ -433,7 +433,7 @@ A camada de processamento concentra as operações analíticas e matemáticas do
 
 O módulo de importação é responsável por obter os dados históricos dos ativos selecionados, seja por meio de arquivos locais, seja por integração com uma fonte externa de dados. O módulo estatístico realiza cálculos como retorno médio, variância, covariância e volatilidade, que servem de base para os algoritmos de otimização.
 
-Já o módulo de otimização reúne as diferentes técnicas avaliadas no projeto, como Programação Linear, Algoritmo Genético e Simulated Annealing. Cada uma dessas abordagens recebe os mesmos dados de entrada e parâmetros definidos pelo usuário, permitindo a geração de resultados comparáveis. Após a execução das técnicas, o módulo de comparação consolida os indicadores de desempenho de cada método, como retorno esperado, risco, índice de Sharpe e tempo de execução.
+Já o módulo de otimização reúne as diferentes técnicas avaliadas no projeto, como Programação Quadrática, Algoritmo Genético e Simulated Annealing. Cada uma dessas abordagens recebe os mesmos dados de entrada e parâmetros definidos pelo usuário, permitindo a geração de resultados comparáveis. Após a execução das técnicas, o módulo de comparação consolida os indicadores de desempenho de cada método, como retorno esperado, risco, índice de Sharpe e tempo de execução.
 
 \subsection{Camada de dados}
 
