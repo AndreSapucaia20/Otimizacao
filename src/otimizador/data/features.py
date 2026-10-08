@@ -1,4 +1,4 @@
-﻿"""Feature engineering desacoplado da ingestao."""
+"""Feature engineering desacoplado da ingestao."""
 
 from __future__ import annotations
 
@@ -12,7 +12,7 @@ def build_feature_set(symbols: list[str], prices: pd.DataFrame) -> FeatureSet:
     if prices.empty:
         raise ValueError("Nao ha dados de preco para gerar features.")
 
-    returns = prices.pct_change().dropna()
+    returns = np.log(prices).diff().replace([np.inf, -np.inf], np.nan).dropna()
     if returns.empty:
         raise ValueError("Nao ha dados suficientes para geracao de features.")
 
