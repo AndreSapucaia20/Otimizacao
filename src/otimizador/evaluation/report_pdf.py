@@ -117,7 +117,7 @@ def generate_pdf_report(
     story = []
     story.append(Paragraph("Relatorio de Otimizacao de Carteira", title_style))
     story.append(Spacer(1, 8))
-    story.append(Paragraph("Projeto: Otimizador (LP, GA, SA)", text_style))
+    story.append(Paragraph("Projeto: Otimizador (PQ, GA, SA)", text_style))
     story.append(
         Paragraph(f"Simbolos: {', '.join(report_data.get('symbols', []))}", text_style)
     )
@@ -168,4 +168,3 @@ def generate_pdf_report(
     doc = SimpleDocTemplate(str(output_pdf), pagesize=A4)
     doc.build(story)
     return output_pdf.resolve()
-
