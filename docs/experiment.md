@@ -34,12 +34,5 @@ Por ser linear, permite usar programação linear e manter o mesmo contrato para
 ## Decisões de design (MVP)
 
 1. Contrato único de saída JSON para facilitar comparação, API e persistência.
-2. Handlers Lambda finos, sem lógica pesada; lógica de negócio no pacote principal.
 3. Sem dependência de AWS para execução local.
 4. Testes rápidos com mocks para rede e handlers.
-
-## Próximos passos sugeridos (pós-MVP)
-
-1. Persistir resultados em DynamoDB e versão dos experimentos em S3.
-2. Orquestrar pipeline com Step Functions + EventBridge para execuções agendadas.
-3. Expandir universo de ativos e incluir covariância para objetivo mais robusto.
