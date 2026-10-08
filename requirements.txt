@@ -1,9 +1,8 @@
-numpy==1.26.4
-pandas==2.2.2
-yfinance==0.2.44
+numpy>=1.26
+pandas>=2.2
+yfinance>=0.2.44
 reportlab>=4.0
-matplotlib==3.8.4
-contourpy==1.2.1
-scipy>=1.11,<1.15
+matplotlib>=3.8
+scipy>=1.11
 fastapi>=0.111
 uvicorn>=0.30
