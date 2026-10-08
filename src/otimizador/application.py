@@ -1,4 +1,4 @@
-﻿"""Orquestracao ponta a ponta do experimento local."""
+"""Orquestracao ponta a ponta do experimento local."""
 
 from __future__ import annotations
 
@@ -6,13 +6,13 @@ from dataclasses import replace
 from typing import Any
 
 from otimizador.algorithms.genetic import run_genetic_algorithm
-from otimizador.algorithms.linear_programming import run_linear_programming
+from otimizador.algorithms.quadratic_programming import run_quadratic_programming
 from otimizador.algorithms.simulated_annealing import run_simulated_annealing
 from otimizador.data.features import build_feature_set
 from otimizador.data.ingestion import fetch_prices
 from otimizador.domain.config import AppConfig, load_config_from_env
 from otimizador.domain.models import OptimizationRequest
-from otimizador.domain.objective import LinearRiskAdjustedObjective
+from otimizador.domain.objective import MeanVarianceObjective
 from otimizador.domain.schema import validate_algorithm_output
 from otimizador.evaluation.comparison import build_comparison_report
 
@@ -71,10 +71,10 @@ def run_full_experiment(
         cfg = replace(cfg, optimizer=replace(cfg.optimizer, max_weight=max_weight))
 
     request = build_optimization_request(cfg)
-    objective = LinearRiskAdjustedObjective(risk_aversion=request.risk_aversion)
+    objective = MeanVarianceObjective(risk_aversion=request.risk_aversion)
 
     results = [
-        run_linear_programming(request, objective),
+        run_quadratic_programming(request, objective),
         run_genetic_algorithm(
             request=request,
             objective=objective,
@@ -100,7 +100,7 @@ def run_full_experiment(
     return {
         "symbol": request.symbol,
         "symbols": cfg.data.symbols,
-        "objective": "linear_risk_adjusted_return",
+        "objective": "mean_variance_utility",
         "period": cfg.data.period,
         "start_date": cfg.data.start_date,
         "end_date": cfg.data.end_date,
