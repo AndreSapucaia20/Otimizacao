@@ -120,7 +120,7 @@ Em outro terminal, sirva o front-end estático:
 ```text
 python -m http.server 8080 --directory frontend
 ```
-Abra http://localhost:8080. O front já aponta para http://localhost:8000.
+Abra http://localhost:8080.
 
 Endpoints:
 ```text
