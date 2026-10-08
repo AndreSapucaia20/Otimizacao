@@ -20,8 +20,13 @@ class ObjectiveFunction(Protocol):
 
 
 @dataclass(frozen=True)
-class LinearRiskAdjustedObjective:
-    """Objetivo linear: retorno esperado menos penalidade por volatilidade."""
+class MeanVarianceObjective:
+    """Utilidade media-variancia de Markowitz: mu'w - lambda * w'Sigma w.
+
+    E a mesma funcao descrita no relatorio. Como e quadratica e concava
+    (Sigma e semidefinida positiva), a Programacao Quadratica encontra o
+    otimo global; GA e SA usam a mesma funcao como aptidao/energia.
+    """
 
     risk_aversion: float
 
@@ -36,9 +41,6 @@ class LinearRiskAdjustedObjective:
         if covariance is None:
             covariance = np.diag(np.square(volatility))
         covariance = np.asarray(covariance, dtype=float)
-        portfolio_variance = float(weights @ covariance @ weights)
-        portfolio_variance = max(portfolio_variance, 0.0)
-        portfolio_volatility = float(np.sqrt(portfolio_variance))
-
+        portfolio_variance = max(float(weights @ covariance @ weights), 0.0)
         expected_portfolio_return = float(np.dot(weights, expected_returns))
-        return expected_portfolio_return - (self.risk_aversion * portfolio_volatility)
+        return expected_portfolio_return - (self.risk_aversion * portfolio_variance)
