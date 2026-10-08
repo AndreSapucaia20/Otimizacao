@@ -51,7 +51,7 @@ bash
 python -m venv .venv
 .venv\Scripts\activate         # Windows
 
-pip install -r requirements.txt
+pip install -r requirements.txt -r requirements-dev.txt
 $env:PYTHONPATH='src'
 ```
 
