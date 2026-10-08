@@ -10,14 +10,14 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 from otimizador.algorithms.genetic import run_genetic_algorithm
-from otimizador.algorithms.linear_programming import run_linear_programming
+from otimizador.algorithms.quadratic_programming import run_quadratic_programming
 from otimizador.algorithms.simulated_annealing import run_simulated_annealing
 from otimizador.application import run_full_experiment
 from otimizador.data.features import build_feature_set
 from otimizador.data.ingestion import fetch_prices
 from otimizador.domain.config import load_config_from_env
 from otimizador.domain.models import OptimizationRequest
-from otimizador.domain.objective import LinearRiskAdjustedObjective
+from otimizador.domain.objective import MeanVarianceObjective
 
 
 def _parse_symbols(value: str | None) -> list[str] | None:
@@ -303,7 +303,7 @@ def _save_07_frontier(
 def _save_08_convergence(
     output_dir: Path,
     request: OptimizationRequest,
-    objective: LinearRiskAdjustedObjective,
+    objective: MeanVarianceObjective,
     ga_population_size: int,
     sa_initial_temperature: float,
     sa_cooling_rate: float,
@@ -323,12 +323,12 @@ def _save_08_convergence(
         )
         sa_scores.append(result.objective_value)
 
-    lp_score = run_linear_programming(request, objective).objective_value
+    lp_score = run_quadratic_programming(request, objective).objective_value
 
     fig, ax = plt.subplots(figsize=(12, 6))
     ax.plot(ga_steps, ga_scores, marker="o", label="GA")
     ax.plot(sa_steps, sa_scores, marker="s", label="SA")
-    ax.axhline(lp_score, color="black", linestyle="--", label="LP")
+    ax.axhline(lp_score, color="black", linestyle="--", label="PQ")
     ax.set_title("08 - Curva de Convergencia")
     ax.set_xlabel("Iteracoes/geracoes")
     ax.set_ylabel("Objective Value")
@@ -349,7 +349,7 @@ def _save_09_backtest(
 
     fig, ax = plt.subplots(figsize=(12, 6))
     for name, weights in algo_weights.items():
-        portfolio_ret = returns @ weights
+        portfolio_ret = np.expm1(returns) @ weights
         equity = np.cumprod(1.0 + portfolio_ret)
         equity_curves[name] = equity
         ax.plot(dates, equity, label=name)
@@ -486,7 +486,7 @@ def main() -> None:
     _save_08_convergence(
         output_dir,
         request,
-        LinearRiskAdjustedObjective(risk_aversion=request.risk_aversion),
+        MeanVarianceObjective(risk_aversion=request.risk_aversion),
         context["ga_population_size"],
         context["sa_initial_temperature"],
         context["sa_cooling_rate"],
