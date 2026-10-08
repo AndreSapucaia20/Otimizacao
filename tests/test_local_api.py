@@ -17,13 +17,13 @@ def test_report_pdf_endpoint_returns_pdf(mocker, tmp_path: Path):
         return_value={
             "symbol": "PETR4.SA,VALE3.SA",
             "symbols": ["PETR4.SA", "VALE3.SA"],
-            "objective": "linear_risk_adjusted_return",
+            "objective": "mean_variance_utility",
             "period": "2y",
             "start_date": "2015-01-01",
             "end_date": "2025-12-31",
             "interval": "1d",
             "results": [],
-            "comparison": {"winner": "linear_programming", "summary": []},
+            "comparison": {"winner": "quadratic_programming", "summary": []},
         },
     )
     mocker.patch("otimizador.infrastructure.local_api.export_experiment_results")
