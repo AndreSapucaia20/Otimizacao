@@ -12,7 +12,7 @@ def test_export_experiment_results_creates_files(tmp_path: Path):
         "symbols": ["PETR4.SA", "VALE3.SA"],
         "results": [
             {
-                "algorithm": "linear_programming",
+                "algorithm": "quadratic_programming",
                 "symbol": "PETR4.SA,VALE3.SA",
                 "objective_value": 0.12,
                 "expected_return": 0.01,
