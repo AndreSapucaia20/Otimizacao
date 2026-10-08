@@ -1,4 +1,4 @@
-﻿"""Configuracao do projeto via variaveis de ambiente."""
+"""Configuracao do projeto via variaveis de ambiente."""
 
 from __future__ import annotations
 
@@ -22,7 +22,7 @@ class DataConfig:
 
 @dataclass(frozen=True)
 class OptimizerConfig:
-    risk_aversion: float = 0.35
+    risk_aversion: float = 3.0
     max_weight: float = 0.6
     random_seed: int = 42
     ga_population_size: int = 32
@@ -43,7 +43,9 @@ def load_config_from_env() -> AppConfig:
     if symbols_raw:
         symbols = _parse_symbols(symbols_raw)
     else:
-        symbols = [os.getenv("OTIMIZADOR_SYMBOL", "PETR4.SA").strip().upper()]
+        symbols = _parse_symbols(
+            os.getenv("OTIMIZADOR_SYMBOL", "PETR4.SA,VALE3.SA,ITUB4.SA")
+        )
 
     if not symbols:
         symbols = ["PETR4.SA"]
@@ -52,13 +54,13 @@ def load_config_from_env() -> AppConfig:
         data=DataConfig(
             symbols=symbols,
             period=os.getenv("OTIMIZADOR_PERIOD", "2y"),
-            start_date=os.getenv("OTIMIZADOR_START_DATE"),
-            end_date=os.getenv("OTIMIZADOR_END_DATE"),
+            start_date=os.getenv("OTIMIZADOR_START_DATE", "2015-01-01"),
+            end_date=os.getenv("OTIMIZADOR_END_DATE", "2025-12-31"),
             interval=os.getenv("OTIMIZADOR_INTERVAL", "1d"),
             cache_dir=os.getenv("OTIMIZADOR_CACHE_DIR", "cache"),
         ),
         optimizer=OptimizerConfig(
-            risk_aversion=float(os.getenv("OTIMIZADOR_RISK_AVERSION", "0.35")),
+            risk_aversion=float(os.getenv("OTIMIZADOR_RISK_AVERSION", "3.0")),
             max_weight=float(os.getenv("OTIMIZADOR_MAX_WEIGHT", "0.6")),
             random_seed=int(os.getenv("OTIMIZADOR_RANDOM_SEED", "42")),
             ga_population_size=int(os.getenv("OTIMIZADOR_GA_POPULATION", "32")),
