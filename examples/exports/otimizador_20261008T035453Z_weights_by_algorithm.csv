@@ -1,0 +1,10 @@
+algorithm,asset,weight
+quadratic_programming,PETR4.SA,0.11862251957375561
+quadratic_programming,VALE3.SA,0.2813774804262438
+quadratic_programming,ITUB4.SA,0.6000000000000006
+genetic_algorithm,PETR4.SA,0.11878986786576717
+genetic_algorithm,VALE3.SA,0.2812101321342328
+genetic_algorithm,ITUB4.SA,0.6
+simulated_annealing,PETR4.SA,0.35834314691750363
+simulated_annealing,VALE3.SA,0.21854747200394278
+simulated_annealing,ITUB4.SA,0.4231093810785536

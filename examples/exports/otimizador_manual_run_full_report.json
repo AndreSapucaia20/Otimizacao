@@ -1,0 +1,218 @@
+{
+  "symbol": "PETR4.SA,VALE3.SA,ITUB4.SA",
+  "symbols": [
+    "PETR4.SA",
+    "VALE3.SA",
+    "ITUB4.SA"
+  ],
+  "objective": "mean_variance_utility",
+  "period": "2y",
+  "start_date": "2015-01-01",
+  "end_date": "2025-12-31",
+  "interval": "1d",
+  "results": [
+    {
+      "algorithm": "quadratic_programming",
+      "symbol": "PETR4.SA,VALE3.SA,ITUB4.SA",
+      "objective_value": -0.0003076354574649158,
+      "expected_return": 0.0006448731936831586,
+      "weights": {
+        "PETR4.SA": 0.11862204862020842,
+        "VALE3.SA": 0.28137795137982724,
+        "ITUB4.SA": 0.5999999999999643
+      },
+      "elapsed_ms": 0.9894999966491014,
+      "metadata": {
+        "risk_aversion": 3.0,
+        "portfolio_volatility": 0.017818610600044683,
+        "sharpe_ratio": 0.03619099200032698,
+        "asset_volatility": {
+          "PETR4.SA": 0.0290503401907438,
+          "VALE3.SA": 0.02650996380641901,
+          "ITUB4.SA": 0.019022479548242557
+        },
+        "risk_contribution": {
+          "PETR4.SA": 0.002459886925033448,
+          "VALE3.SA": 0.005316366540343161,
+          "ITUB4.SA": 0.010042357134668077
+        },
+        "risk_contribution_pct": {
+          "PETR4.SA": 0.13805155633331362,
+          "VALE3.SA": 0.2983603300882409,
+          "ITUB4.SA": 0.5635881135784455
+        },
+        "solver": "scipy_slsqp",
+        "converged": true,
+        "iterations": 3,
+        "symbols": [
+          "PETR4.SA",
+          "VALE3.SA",
+          "ITUB4.SA"
+        ],
+        "period": "2y",
+        "start_date": "2015-01-01",
+        "end_date": "2025-12-31",
+        "interval": "1d",
+        "samples": 2736,
+        "max_weight": 0.6
+      }
+    },
+    {
+      "algorithm": "genetic_algorithm",
+      "symbol": "PETR4.SA,VALE3.SA,ITUB4.SA",
+      "objective_value": -0.0003076355315030602,
+      "expected_return": 0.0006449062630018894,
+      "weights": {
+        "PETR4.SA": 0.11878986786576717,
+        "VALE3.SA": 0.2812101321342328,
+        "ITUB4.SA": 0.6
+      },
+      "elapsed_ms": 159.0107999945758,
+      "metadata": {
+        "risk_aversion": 3.0,
+        "portfolio_volatility": 0.017818920604280437,
+        "sharpe_ratio": 0.036192218222633014,
+        "asset_volatility": {
+          "PETR4.SA": 0.0290503401907438,
+          "VALE3.SA": 0.02650996380641901,
+          "ITUB4.SA": 0.019022479548242557
+        },
+        "risk_contribution": {
+          "PETR4.SA": 0.0024638933349229843,
+          "VALE3.SA": 0.005312129883430575,
+          "ITUB4.SA": 0.010042897385926874
+        },
+        "risk_contribution_pct": {
+          "PETR4.SA": 0.13827399479691893,
+          "VALE3.SA": 0.2981173776684601,
+          "ITUB4.SA": 0.5636086275346209
+        },
+        "population_size": 32,
+        "generations": 50,
+        "seed": 42,
+        "symbols": [
+          "PETR4.SA",
+          "VALE3.SA",
+          "ITUB4.SA"
+        ],
+        "period": "2y",
+        "start_date": "2015-01-01",
+        "end_date": "2025-12-31",
+        "interval": "1d",
+        "samples": 2736,
+        "max_weight": 0.6
+      }
+    },
+    {
+      "algorithm": "simulated_annealing",
+      "symbol": "PETR4.SA,VALE3.SA,ITUB4.SA",
+      "objective_value": -0.0004131586195231312,
+      "expected_return": 0.0007217240724017447,
+      "weights": {
+        "PETR4.SA": 0.35834314691750363,
+        "VALE3.SA": 0.21854747200394278,
+        "ITUB4.SA": 0.4231093810785536
+      },
+      "elapsed_ms": 14.692800003103912,
+      "metadata": {
+        "risk_aversion": 3.0,
+        "portfolio_volatility": 0.01944978741893148,
+        "sharpe_ratio": 0.037107041678987894,
+        "asset_volatility": {
+          "PETR4.SA": 0.0290503401907438,
+          "VALE3.SA": 0.02650996380641901,
+          "ITUB4.SA": 0.019022479548242557
+        },
+        "risk_contribution": {
+          "PETR4.SA": 0.009197749436740527,
+          "VALE3.SA": 0.0038621453697759577,
+          "ITUB4.SA": 0.006389892612414999
+        },
+        "risk_contribution_pct": {
+          "PETR4.SA": 0.4728971704743612,
+          "VALE3.SA": 0.19857005563036292,
+          "ITUB4.SA": 0.3285327738952759
+        },
+        "iterations": 250,
+        "initial_temperature": 1.0,
+        "cooling_rate": 0.98,
+        "seed": 42,
+        "symbols": [
+          "PETR4.SA",
+          "VALE3.SA",
+          "ITUB4.SA"
+        ],
+        "period": "2y",
+        "start_date": "2015-01-01",
+        "end_date": "2025-12-31",
+        "interval": "1d",
+        "samples": 2736,
+        "max_weight": 0.6
+      }
+    }
+  ],
+  "comparison": {
+    "ranking": [
+      "quadratic_programming",
+      "genetic_algorithm",
+      "simulated_annealing"
+    ],
+    "summary": [
+      {
+        "algorithm": "quadratic_programming",
+        "objective_value": -0.0003076354574649158,
+        "expected_return": 0.0006448731936831586,
+        "elapsed_ms": 0.9894999966491014,
+        "portfolio_volatility": 0.017818610600044683,
+        "sharpe_ratio": 0.03619099200032698,
+        "weights": {
+          "PETR4.SA": 0.11862204862020842,
+          "VALE3.SA": 0.28137795137982724,
+          "ITUB4.SA": 0.5999999999999643
+        },
+        "risk_contribution_pct": {
+          "PETR4.SA": 0.13805155633331362,
+          "VALE3.SA": 0.2983603300882409,
+          "ITUB4.SA": 0.5635881135784455
+        }
+      },
+      {
+        "algorithm": "genetic_algorithm",
+        "objective_value": -0.0003076355315030602,
+        "expected_return": 0.0006449062630018894,
+        "elapsed_ms": 159.0107999945758,
+        "portfolio_volatility": 0.017818920604280437,
+        "sharpe_ratio": 0.036192218222633014,
+        "weights": {
+          "PETR4.SA": 0.11878986786576717,
+          "VALE3.SA": 0.2812101321342328,
+          "ITUB4.SA": 0.6
+        },
+        "risk_contribution_pct": {
+          "PETR4.SA": 0.13827399479691893,
+          "VALE3.SA": 0.2981173776684601,
+          "ITUB4.SA": 0.5636086275346209
+        }
+      },
+      {
+        "algorithm": "simulated_annealing",
+        "objective_value": -0.0004131586195231312,
+        "expected_return": 0.0007217240724017447,
+        "elapsed_ms": 14.692800003103912,
+        "portfolio_volatility": 0.01944978741893148,
+        "sharpe_ratio": 0.037107041678987894,
+        "weights": {
+          "PETR4.SA": 0.35834314691750363,
+          "VALE3.SA": 0.21854747200394278,
+          "ITUB4.SA": 0.4231093810785536
+        },
+        "risk_contribution_pct": {
+          "PETR4.SA": 0.4728971704743612,
+          "VALE3.SA": 0.19857005563036292,
+          "ITUB4.SA": 0.3285327738952759
+        }
+      }
+    ],
+    "winner": "quadratic_programming"
+  }
+}
