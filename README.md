@@ -49,7 +49,17 @@ Requer Python 3.10 ou superior.
 
 bash
 python -m venv .venv
-source .venv/bin/activate        # Linux/macOS
-# .venv\Scripts\activate         # Windows
+.venv\Scripts\activate         # Windows
 
 pip install -r requirements.txt
+$env:PYTHONPATH='src'
+
+## Como executar
+Experimento completo (imprime o JSON com os três algoritmos e o ranking):
+```text
+python -m otimizador
+```
+Experimento com exportação para examples/exports/:
+```text
+python scripts/run_local_experiment.py
+```
