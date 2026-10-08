@@ -49,7 +49,7 @@ Valor da função objetivo, retorno esperado diário, volatilidade da carteira, 
 
 O Sharpe é calculado como retorno esperado dividido pela volatilidade, sobre retornos diários, sem taxa livre de risco e sem anualização.
 
-## Resultado de referência (execução de 08/10/2026)
+## Resultado de referência
 
 | Algoritmo | Objetivo | Retorno | Volatilidade | Sharpe | Tempo (ms) |
 |---|---|---|---|---|---|
